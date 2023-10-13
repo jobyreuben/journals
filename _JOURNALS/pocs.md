@@ -13,7 +13,7 @@ Proof of Contract Stake (PoCS) is an innovative staking system utilizing contrac
 
 The Proof of Contract Stake (PoCS) is an alternative staking mechanism to Proof of Stake that utilizes the history of gas consumption from contracts as a scarce and limited resource. This resource can be staked to elect/select block producers. PoCS introduces a hybrid proof-of-work and proof-of-stake model, offering an environmentally sustainable solution that can be relied upon for a public blockchain's network security. This consensus model focuses on developers, providing them with an incentive mechanism for contributing to network security.
 
-![PoCS-Overview]({{site.baseurl}}/assets/pocs/pocs.jpeg)
+![PoCS-Overview](/assets/pocs/pocs.jpeg)
 
 Contract storage fields are expanded to allow the validator's information to be stored with specific conditions where each contract's stake score is determined based on various parameters, including its staking age, reputation, and total metered gas consumption. These factors can be delegated to a chosen validator by the contract's owner.
 
@@ -339,7 +339,7 @@ You can find the simulation scripts that output the following charts on the [sou
 
 Simulating Total Network's Stake supply from Ethereum History of transactions. This provides us with the total network's Stake per time period (1 month) and its supply curve. Since there is uncertainty of staking age, we will assume that the contracts haven't changed validators since creation.
 
-![Ethereum PoCS Network Stake Supply]({{site.baseurl}}/assets/pocs/eth-pocs-supply.png)
+![Ethereum PoCS Network Stake Supply](/assets/pocs/eth-pocs-supply.png)
 
 - The simulation results data illustrates Ethereum PoCS's transaction landscape up until the beginning of the 20th month, covering a span of over 1.6 years. During this period, it is evident that Ethereum predominantly featured simple balance transfers as opposed to Contract Calls. Proof of Contract Stake (PoCS) consensus demonstrates optimal suitability for blockchains primarily dedicated to contract execution, where the emphasis lies on complex interactions rather than straightforward value transfers.
 - Notably, a significant shift occurs around Month 50, marking the commencement of Ethereum's fourth year. During this phase, contract transaction stake scores exhibit a recurring pattern of doubling each month. This surge can be attributed to the simultaneous rise in gas consumption and the accumulation of reputation within the Ethereum PoCS simulated ecosystem.
@@ -349,7 +349,7 @@ Simulating Total Network's Stake supply from Ethereum History of transactions. T
 
 Simulating Uniswap V1, V2, V3 on Ethereum running Proof of Contract Stake and providing results of network to stake ratio. This provides information on the total stake held by Uniswap Developers compared to Ethereum PoCS total network stake on specific slots of a time period (typically every 1 month). Since there is uncertainty of staking age, we will assume that the contracts haven't changed validators since creation. Also, there are monthly staking rewards provided by assuming that the sample size of the validator's activity is large (With the Law of Large Numbers Probability) since block author selection the stake rewards come with uncertainty to simulate.
 
-![Uniswap - Ethereum PoCS]({{site.baseurl}}/assets/pocs/uniswap-pocs.png)
+![Uniswap - Ethereum PoCS](/assets/pocs/uniswap-pocs.png)
 
 Via the [simulation scripts](https://github.com/jobyreuben/journals/simulation/pocs) readers can simulate Ethereum PoCS to avail the staking insights of various available contract addresses and projects.
 
@@ -369,7 +369,7 @@ While accumulating native tokens in PoS Chains are permissible, and PoW allows f
 
 #### Ethereum PoCS 10% Block Collusion Attack
 
-![10% block collusion attack- Ethereum PoCS]({{site.baseurl}}/assets/pocs/10-of-block.png)
+![10% block collusion attack- Ethereum PoCS](/assets/pocs/10-of-block.png)
 
 - The prevalence of primarily simple balance transfer transactions during Ethereum's initial months limits the accrual of stake supply, simulating it is unsuitable for Proof of Contract Stake (PoCS) due to insufficient stake saturation.
 - Observing the simulation outcomes, even with an intrusion of attack transactions constituting 10% of all blocks, commencing from the fourth month, it remains unfeasible for the attacker to attain a 51% stake.
@@ -377,7 +377,7 @@ While accumulating native tokens in PoS Chains are permissible, and PoW allows f
 
 #### Ethereum PoCS 20% Block Collusion Attack
 
-![20% block collusion attack- Ethereum PoCS]({{site.baseurl}}/assets/pocs/20-of-block.png)
+![20% block collusion attack- Ethereum PoCS](/assets/pocs/20-of-block.png)
 
 - Executing a 20% block attack presents substantial challenges due to the blockchain's pattern recognition mechanisms. Despite this, a simulation of the outcomes can be presented.
 - Through the simulation, it becomes evident that post the 30th month, executing a 20% block attack becomes inviable. This is attributed to the saturation of forthcoming blocks, leading to a consistent reduction in the attacker's stake. Despite a constant influx of attack transactions, the attacker's stake diminishes over time.
