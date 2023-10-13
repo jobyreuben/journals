@@ -18,18 +18,14 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Your Journal Title
-email: your-email@example.com
-author: Your name
-description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "/mini-journal" # the subpath of your site, e.g. /blog
-url: "https://silvernberry.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+title: Joby Reuben's Journals
+author: Joby Reuben
+description: You can find journal articles that involves research findings and protocol designs written by Joby Reuben
+baseurl: "/journals" # the subpath of your site, e.g. /blog
+url: "https://jobyreuben.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
-repository: username/reponame
+repository: jobyreuben/journals
 
 # Build settings
 theme: minima
@@ -67,10 +63,10 @@ kramdown:
 # rss feed info's
 
 feed:
-  title: Your Journal Title
-  description: Your site's description
-  author: Your name
-  url: Your url
+  title: Joby Reuben's Journals
+  description: You can find journal articles that involves research findings and protocol designs written by Joby Reuben
+  author: Joby Reuben
+  url: https://jobyreuben.in/
   lang: en
 
 collections:

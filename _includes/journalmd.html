@@ -1,7 +1,7 @@
 
 <div class="btncontainer">
     <button class="sourcebtn" href="javascript:void(0);" onclick="window.print();"><i class='bx mdicon bxs-file-pdf' style='color:#ffffff' ></i>Download as PDF</button>
-    <button class="sourcebtn"><a class="btnlnk" href="#" target="_blank"><i class='bx mdicon bxl-github' style="color: white;"></i>Edit on Github</a></button>   <!-- If you want the edit on github to work use {% github_edit_link %} in href like href="{% github_edit_link %}" -->
+    <button class="sourcebtn"><a class="btnlnk" href="{% github_edit_link %}" target="_blank"><i class='bx mdicon bxl-github' style="color: white;"></i>Edit on Github</a></button>   <!-- If you want the edit on github to work use {% github_edit_link %} in href like href="{% github_edit_link %}" -->
     <div class="sharediv">
             <button id="shareButton" class="socialbtn share-button"><i class='bx mdicon bxs-share-alt' style='color:#ffffff'  ></i>Share</a></button>           
             <div class="share-menu" id="shareMenu">
@@ -12,7 +12,7 @@
             </div>
         </div>
     {% if page.discuss != nil %}        
-    <button class="socialbtn"><i class='bx mdicon bxs-conversation'></i><a class="btnlnk" href="https://example.com/{{page.discuss}}">Discuss</a></button>  
+    <button class="socialbtn"><i class='bx mdicon bxs-conversation'></i><a class="btnlnk" href="https://openicn.auguth.com/d/{{page.discuss}}">Discuss</a></button>  
     {% endif %}  
     <button class="rssbtn"><a class="btnlnk" href="{{ site.baseurl }}/rss.xml" target="_blank"><i class='bx bx-rss' style="color: #ffffff;" ></i>RSS</a></button>           
 </div>
