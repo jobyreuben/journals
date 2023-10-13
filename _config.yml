@@ -22,7 +22,7 @@ title: Joby Reuben's Journals
 author: Joby Reuben
 description: You can find journal articles that involves research findings and protocol designs written by Joby Reuben
 baseurl: "/journals" # the subpath of your site, e.g. /blog
-url: "https://jobyreuben.in" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http://jobyreuben.in" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
 repository: jobyreuben/journals
