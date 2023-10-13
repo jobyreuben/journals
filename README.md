@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<img src="\assets\images\joby.png" alt="Joby-Profile" width="150" height="150">
+<img src="{{site.baseurl}}/assets/images/joby.png" alt="Joby-Profile" width="150" height="150">
 
 
 # Joby - Research Lead at Auguth Tech
