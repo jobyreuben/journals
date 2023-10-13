@@ -333,7 +333,7 @@ We will simulate PoCS on Ethereum Transaction History and prove how PoCS behaves
 
 Ethereum History Queried/Downloaded from [BigQuery crypto.ethereum](https://bigquery.cloud.google.com/dataset/bigquery-public-data:crypto_ethereum). Input Table: Transactions
 
-You can find the simulation scripts that output the following charts on the [source repository](https://github.com/jobyreuben/journals/simulation/pocs).
+You can find the simulation scripts that output the following charts on the [source repository](https://github.com/jobyreuben/journals/tree/gh-pages/simulation/pocs).
 
 ###  Ethereum on PoCS Stake Supply
 
@@ -396,7 +396,7 @@ While accumulating native tokens in PoS Chains are permissible, and PoW allows f
 
 Substrate, as a modular blockchain framework, already offers a Nominated Proof of Stake (NPoS) staking model (Currently used by Polkadot for its Relay Chain). This model primarily revolves around the collaboration of validators and nominators. A critical aspect of this model involves bonding a certain stash of the native token of the blockchain to a validator or nominator account. With lesser modifications to the existing staking mechanism we would need to propose PoCS pallets to provide interoperability among existing infrastructure.
 
-## Per-Transaction Stake Score
+### Per-Transaction Stake Score
 
 Substrate diverges from the conventional gas-based approach by employing a time-based mechanism called "weight", also known as "refTime". In this context, it is essential to elucidate the suitability of refTime as a viable alternative to the traditional gas concept. 
 
@@ -426,7 +426,7 @@ Here are the contract fields explained in more detail:
 
 These contract fields collectively facilitate the dynamic and effective operation of the contract within the blockchain ecosystem, allowing it to build reputation, engage with specific validators, and actively participate in the staking system.
 
-## Bonding to Validator
+### Bonding to Validator
 
 Ensuring the seamless integration of the Proof of Contract Stake (PoCS) with Substrate's existing pallets is of paramount importance. In a standard Nominated Proof of Stake (NPoS) system, an account is required to stake a specific amount of the native token balance (currency), designating it to a stash account (validator account), controller account (for bonding and unbonding), and a payee (responsible for receiving rewards).
 
@@ -440,7 +440,7 @@ Furthermore, in order to establish a trustless PoCS staking environment, it is a
 
 During each transaction, the contract's storage fields diligently maintain a record of the contract's cumulative stake score. The per-transaction stake score is then added as an extra bond, represented in token balances, to the existing contract's bonded (staked) validator. The contract deployer, after deploying their contract, is required to initiate an additional call to update their delegateTo field and bond their contract to the validator. This step allows them to include their stake score as an additional contribution to the bond, enhancing the overall stake in the network.
 
-## Non-Custodial Rewards
+### Non-Custodial Rewards
 
 Validators have the autonomy to make a strategic choice between being a trusted or trustless validator, primarily driven by considerations related to reward distribution. This decision hinges on whether rewards are held by an external account requiring signatures, potentially exposing them to the risk of bad acting. Conversely, validators can opt for a non-custodial approach by opting for a  smart contract based controller account (responsible for receiving rewards) equipped with predefined rules which can be audited openly.
 
@@ -448,17 +448,17 @@ It is essential for every contract deployer (staker) to be aware of their valida
 
 Contract Owners can initiate an extrinsic call, for claiming rewards, to the controller smart contract. This call, in turn, can trigger an internal call to contracts pallet adapted for the PoCS version, utilizing various methods available within the Substrate framework, such as Chain Extensions. The purpose of this call is to verify the authenticity of the caller, ensuring that the caller is the rightful owner of the contract address that is bonded to the validator's controller account. This rigorous verification process reinforces the trustless nature of the reward distribution system, enhancing the overall security and integrity of the network.
 
-## Other Pallet Compatibility
+### Other Pallet Compatibility
 
 The representation of stake score as a balance unit within the constrained staking environment, devoid of attributes for payments and transfers, necessitates compatibility with other pallets, notably democracy, BABE, and GRANDPA. This compatibility is pivotal as it ensures interoperability with existing pallets, ultimately affording developers a viable framework for considering PoCS as an alternative for Smart Contract Substrate Chains.
 
-### Work Flow
+### Work Flow UML
 
 <!--
 Comprehensive UML diagrams should be presented to depict the entire workflow involving various stakeholders, including Contract Owners, Executors, and Validators. This encompasses various stages such as deployment, staking, executing smart contracts, bonding, extra bonding, reward withdrawal, and validator change.
 -->
 
-### Overflow Issues
+### Stake Score Overflow Issues
 
 <!--
 The design should address potential issues related to overflow, particularly those pertaining to Stake Score and Validator Bonded Balance. Strategies for mitigating or managing these issues should be discussed to ensure the robustness and reliability of the PoCS system.
