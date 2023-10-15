@@ -41,7 +41,7 @@ a:hover{
   text-decoration: underline;
 }
 p{
-  text-align:justify;
+  /* text-align:justify; */
   line-height: 1.5;
 }
 li{

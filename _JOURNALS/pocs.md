@@ -436,7 +436,7 @@ In essence, this approach results in the creation of new token units, symbolizin
 
 To ensure compatibility between PoCS stake scores and the existing NPoS infrastructure, which primarily interacts with balances, this integration facilitates interoperability with other runtime pallets that were originally designed for bonded balance units e.g., democracy pallet.
 
-Furthermore, in order to establish a trustless PoCS staking environment, it is advisable to enforce the payee to be the controller account exclusively. This controller account assumes the role of conveying the validator's status, indicating whether they are idle or actively validating. Additionally, it serves as the key point of contact for bonding and unbonding processes.
+Furthermore, in order to establish a trustless PoCS staking environment, it is advisable to enforce the payee to be the controller account exclusively. This controller account serves as the key point of contact for bonding and unbonding processes.
 
 During each transaction, the contract's storage fields diligently maintain a record of the contract's cumulative stake score. The per-transaction stake score is then added as an extra bond, represented in token balances, to the existing contract's bonded (staked) validator. The contract deployer, after deploying their contract, is required to initiate an additional call to update their delegateTo field and bond their contract to the validator. This step allows them to include their stake score as an additional contribution to the bond, enhancing the overall stake in the network.
 
@@ -454,11 +454,11 @@ The representation of stake score as a balance unit within the constrained staki
 
 ### Work Flow UML
 
-<!--
-Comprehensive UML diagrams should be presented to depict the entire workflow involving various stakeholders, including Contract Owners, Executors, and Validators. This encompasses various stages such as deployment, staking, executing smart contracts, bonding, extra bonding, reward withdrawal, and validator change.
--->
+Proposed Workflow Will be shared after the first Substrate;s reference implementation.
 
 ### Stake Score Overflow Issues
+
+TODO
 
 <!--
 The design should address potential issues related to overflow, particularly those pertaining to Stake Score and Validator Bonded Balance. Strategies for mitigating or managing these issues should be discussed to ensure the robustness and reliability of the PoCS system.
