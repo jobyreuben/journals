@@ -351,7 +351,7 @@ Simulating Uniswap V1, V2, V3 on Ethereum running Proof of Contract Stake and pr
 
 ![Uniswap - Ethereum PoCS](/assets/pocs/uniswap-pocs.png)
 
-Via the [simulation scripts](https://github.com/jobyreuben/journals/simulation/pocs) readers can simulate Ethereum PoCS to avail the staking insights of various available contract addresses and projects.
+Via the [simulation scripts](https://github.com/jobyreuben/journals/tree/gh-pages/simulation/pocs) readers can simulate Ethereum PoCS to avail the staking insights of various available contract addresses and projects.
 
 - Uniswap, being a dominant application on the Ethereum platform utilizing the Proof of Contract Stake (PoCS) consensus mechanism, may have generated an impressive estimated income of around 2 million Ether up to the present time (3 Billion USD).
 - As of the current date, the arrival of numerous additional dApps saturating the Ethereum ecosystem has led to Uniswap falling below the 51% stake threshold. This suggests that other dApps possess comparatively lower stakes, mitigating the susceptibility of the most widely used dApp to a majority stake attack.
