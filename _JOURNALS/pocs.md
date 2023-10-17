@@ -390,7 +390,7 @@ While accumulating native tokens in PoS Chains are permissible, and PoW allows f
 
 ## Substrate (PoCS)
 
-*Special Thanks for Ajay Joshua and Purva Chaudhari for contributing to the conceptualization of the Substrate-based Proof of Contract Stake (PoCS) design*
+*Special Thanks to Ajay Joshua and Purva Chaudhari for contributing to the conceptualization of the Substrate-based Proof of Contract Stake (PoCS) design*
 
 ### Substrate's Native NPoS Staking Model
 
@@ -448,18 +448,35 @@ It is essential for every contract deployer (staker) to be aware of their valida
 
 Contract Owners can initiate an extrinsic call, for claiming rewards, to the controller smart contract. This call, in turn, can trigger an internal call to contracts pallet adapted for the PoCS version, utilizing various methods available within the Substrate framework, such as Chain Extensions. The purpose of this call is to verify the authenticity of the caller, ensuring that the caller is the rightful owner of the contract address that is bonded to the validator's controller account. This rigorous verification process reinforces the trustless nature of the reward distribution system, enhancing the overall security and integrity of the network.
 
-### Other Pallet Compatibility
 
-The representation of stake score as a balance unit within the constrained staking environment, devoid of attributes for payments and transfers, necessitates compatibility with other pallets, notably democracy, BABE, and GRANDPA. This compatibility is pivotal as it ensures interoperability with existing pallets, ultimately affording developers a viable framework for considering PoCS as an alternative for Smart Contract Substrate Chains.
+### Suspension as Penalty
 
-### Work Flow UML
+TODO
 
-Proposed Workflow Will be shared after the first Substrate;s reference implementation.
+<!---
+Penalties can be imposed upon validators who engage in activities that can be construed as malicious attacks conducted by network nodes. Such actions can result in the suspension of a validator for a specified number of blocks, placing them in an idle position. As the Stake Score is both non-fungible and non-transferable, rendering it unusable outside the staking environment, reducing or slashing it is ineffective in mitigating the severity of attacks in Substrate's NPoS <> PoCS Model. Suspending a validator proves to be an effective approach to penalize node operation costs and to notify bonded contract owners to reconsider their validator choices in order to prevent their stake from becoming idle.
 
-### Stake Score Overflow Issues
+The seriousness of a dishonest act is assessed by multiplying the gravity of the offense by the `warmTime`, which is set at 75,000 blocks. Given Substrate's 6-second block time, this translates to an average duration of approximately 5 days. The warmTime serves as a defined period for any actions necessitating a gradual adjustment or preparation and can be used for multiple scenarios.
+-->
+
+### Simple Democracy
 
 TODO
 
 <!--
-The design should address potential issues related to overflow, particularly those pertaining to Stake Score and Validator Bonded Balance. Strategies for mitigating or managing these issues should be discussed to ensure the robustness and reliability of the PoCS system.
+- Validators can only propose with a bond (which cannot vote for their proposal)
+- Validators Can Vote with Bond
+- Once bond votes, again cannot vote (Y or N)
+- First Vote is Pre-Vote (Default Think Time) after proposal to set Vote Time Limit (0, min time set by proposer, min * 2), If majority 0 then the proposal is rejected, if others the period will start and new vote will begin, if min time is preposterous or max time is undervalued validators can vote 0.
+- SetTimeLimit begins the next Voting 
+- Next Vote to Finalize (Y or N)
+- After Result, If no vote after Vote Time Limit, the validator will be given suspended for DefaultTime + SetTimeLimit period after vote enactment.
+- Other logics same like pallet_democracy
+- No internal council, no external proposals, strict direct democracy voting, validator run node hence they propose changes, contracts can run their own nodes to do proposals or their delegateTo update to other validators provide voting benefits to them effectively making them voteDelegate
 -->
+
+### Work Flow UML
+
+TODO: Detailed Workflow UML after Reference Implementation
+
+### Normalization Risks
