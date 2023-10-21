@@ -1,5 +1,5 @@
 ---
-title: Proof of Contract Stake (PoCS) - First Developer-Centric Consensus Mechanism
+title: Proof of Contract Stake (PoCS) - First Developer Centric Consensus Mechanism
 description: Forging Secure Public Networks through Staking Smart Contracts
 date: 2023-07-15
 toc : true
@@ -223,10 +223,6 @@ Sensitivity with Respect to *Gas Consumption* ($g$), $\frac{\partial SS}{\partia
 - Higher `reputation` ($R$) and `gas consumption` ($g$) values increase $SS$, encouraging trustworthy contracts with efficient code.
 
 Let $\mathbb{P}{\text{collusion}}$ be the probability of successfully executing a collusion attack to increase gas consumption for future block authoring by a malicious contract. The Stake Score ($SS$) with `reputation` and `stake age` prevents artificial inflation of the Stake Score, making $\mathbb{P}{\text{collusion}}$ lower over time. With reputation tied to stake, a collusion attack requires cooperation from **2/3 network validators** to execute malicious contracts, making it highly unlikely in a PoCS network. Therefore, $\mathbb{P}{\text{collusion}} < \mathbb{P}{\text{honest}}$, where $\mathbb{P}{\text{honest}}$ is the probability of honest block authoring.
-
-### Normalization
-
-TODO
 
 ##  External Call Monetization
 
@@ -480,3 +476,5 @@ TODO
 TODO: Detailed Workflow UML after Reference Implementation
 
 ### Normalization Risks
+
+TODO

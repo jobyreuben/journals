@@ -146,6 +146,7 @@ chainid = 1
 |Element-wise transformation|||
 |ELEMENT OF reference| Tags of less than, greater than `<element>`||
 |Length of a sequence or a vector/matrix| `||...||` | |
+|Last Item of a sequence| Can be a Function | `!LAST`
 
 
 # Blocks, State and Transactions
@@ -322,7 +323,7 @@ Additional Transaction types are proposed in EIP-2718 with full backwards compat
 
 For EIP-2930 the type is given as "1" `TX_type = 1`, where, its transactions include additional fields:
 
-1. **accessList**: List of access entries to warm up and reduce overhead; defined as `TX_accesslist`. Each access list entry `ENTRY[n]` is a tuple of an account address and a list of storage keys: `ENTRY[n]=(ENTRY_account, ENTRY_storage)` as there'll be a vast number of keys collapsed (bundled) together in a storageRoot. 
+1. **accessList**: List of access entries to warm up and reduce overhead; defined as `TX_..accesslist..`. Each access list entry `ENTRY[n]` is a tuple of an account address and a list of storage keys: `ENTRY[n]=(ENTRY_account, ENTRY_storage)` as there'll be a vast number of keys collapsed (bundled) together in a storageRoot. 
    
 2. **chainId**: Chain ID; defined as `TX_chainid`. Must be equal to the network chain ID which is a scalar value.
 
@@ -378,12 +379,12 @@ If `TX_type = 0`,
 
 If `TX_type = 1`,
 ```
-!PREPARE_TX(TX) = (TX_chainid, TX_nonce, TX_gasprice, TX_gaslimit, TX_to, TX_value, ..TX_message.., TX_accesslist, TX_yparity, TX_r-sig, TX_s-sig)
+!PREPARE_TX(TX) = (TX_chainid, TX_nonce, TX_gasprice, TX_gaslimit, TX_to, TX_value, ..TX_message.., TX_..accesslist.., TX_yparity, TX_r-sig, TX_s-sig)
 ```
 
 To identify the message call's intention we define a `..TX_message..` value which is an arbitrary-sized byte array where if `..TX_data.. = NULL` it is `..TX_init..` - the initialization of a contract code OR `..TX_data..` otherwise which represents an execution of initialized code.
 
-While encoding the values of the transaction fields, RLP-encoding is used `!SPL-FUNC_RLP(TX)` as integer values except the access list `TX_accesslist` and the arbitrary-sized byte arrays `TX_init`, `TX_data`.
+While encoding the values of the transaction fields, RLP-encoding is used `!SPL-FUNC_RLP(TX)` as integer values except the access list `TX_..accesslist..` and the arbitrary-sized byte arrays `TX_init`, `TX_data`.
 
 1. **type**: `TX_type = <{0,1}>`
 2. **chainID**: `TX_chainid = chainid`
@@ -902,9 +903,9 @@ where `..pre-compiles..` is the set of all precompiled contracts addresses.
 
 ## Execution
 
-We define intrinsic gas `gas_0`, the amount of gas this transaction requires to be paid prior to execution, as follows:
+We define intrinsic gas `gas_intrinsic`, the amount of gas this transaction requires to be paid prior to execution, as follows:
 
-The upfront cost is the sum of all checks related to the transaction. The exact gas units details are expanded in section [Fee Schedule](#fee-schedule). 
+The total intrisic gas for a particular transaction is the sum of all checks related to the transaction. The exact gas units details are expanded in section [Fee Schedule](#fee-schedule). 
 
 1. **Data's Gas** : We can find if a transaction is a simple ether transfer in which the `TX_data`, which can be the `TX_init` code if not present it shall result on fee schedule - `GAS_txdatazero`. If its present it results on fee schedule - `GAS_txdatanonzero`. This Gas levied on Data can be assumed as a length fee. 
 
@@ -938,7 +939,80 @@ The upfront cost is the sum of all checks related to the transaction. The exact 
     GAS_transaction
     ```
 
-4. **Access's Gas**: EIP-2929 have introduced accesslists of address and its storage keys
+4. **Access's Gas**: EIP-2929 have introduced accesslists of address and its storage keys. When added in the transaction it can warm up the address or the storage slots. The acesslist gas is charged for each address and storage keys as a warm up cost, hence the total accesslist gas is the sum of all accesslist address and its specified storage keys
+
+```
+SUM OF ALL (GAS_accesslistaddress + GAS_accessliststorage)
+```
+The `SUM OF ALL` specifies every accesslist address and its storage keys starts from index 0. It is specified if the address is only given then it should charge gas costs for the address plus its all storgae keys for warm access, but if a certain storage key is mentioned from its address it only should be charged.
+
+Each GAS_x will be defined in section [Fee Schedule](#fee-schedule).
+
+
+With the total  `gas_intrinsic` a scalar value is found, now we can find the upfront cost provided in Wei units.
+
+The upfront cost is defined as `cost_upfront` where,
+
+```
+cost_upfront = TX_gaslimit*TX_gasprice + TX_value
+```
+
+Now, the validity of an execution is defined as
+
+```
+!SENDER(TX) != NULL 
+
+AND
+
+#STATE[!SENDER(TX)]codehash = !SPL-FUNC_KEC(())
+
+AND
+
+TX_nonce = #STATE[!SENDER(TX)]nonce
+
+AND
+
+gas_intrinsic <= TX_gaslimit 
+
+AND
+
+cost_upfront <= #STATE[!SENDER(TX)]balance
+
+AND
+
+TX_gaslimit <= BLOCK_[HEADER_gaslimit] - !LAST(BLOCK_RECEIPTS)_gascummulative
+
+```
+
+where it asserts that
+1. The sender of the transaction derived from the signature should not be null
+2. The sender's account's code hash should be the value of the keccak function applied on an empty string (as said in EIP-3607)
+3. The TX_nonce should be the state's available sender's nonce
+4. The intrisic gas should be lesser than or equal to the transaction's gas limit
+5. The upfront cost should be lesser than or equal to the state's available sender's balance
+6. The transaction's gas limit should be lesser than the value taken by subtracting the "last receipt item of the block's cummulative gas value" from the block's total gas limit.
+
+We also assume that if `!SENDER(TX) = NULL` then `#STATE[!SENDER(TX)]codehash = !SPL-FUNC_KEC(())`, `#STATE[!SENDER(TX)]nonce = 0`, `#STATE[!SENDER(TX)]balance = 0`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### Note : I'm rewriting the yellowpaper during my free-time hence this is an ongoing work.
