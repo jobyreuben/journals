@@ -236,7 +236,7 @@ If the **codeHash** field is the Keccak-256 hash of the empty string, then the n
 We can define a function called `!PREPARE_#STATE` to handle world-state prepare function which is also commonly referred to the collapse function:
 
 ```
-!PREPARE_#STATE = {POWERSET(ACCOUNT) where, #STATE[ACCOUNT] is not NULL}
+!PREPARE_#STATE = {POWERSET(ACCOUNT) where, #STATE[ACCOUNT] != NULL}
 ```
 
 > **Note**: If and only the state is referenced by an account i.e., `#STATE[ACCOUNT]` it is an account's state, else it is denoted as world state.
@@ -404,7 +404,7 @@ While encoding the values of the transaction fields, RLP-encoding is used `!SPL-
     ```
     TX_field = NON-NEG-INT_n where, TX_field = <NON-NEG-INT> AND < 2^n
     ```
-13. **to**: If `TX_to IS NOT NULL` then, `TX_to = <BYTE{20}>`, Otherwise `TX_to = <BYTE{0}>`
+13. **to**: If `TX_to != NULL` then, `TX_to = <BYTE{20}>`, Otherwise `TX_to = <BYTE{0}>`
     
     The `TX_to` address hash behaves slightly differently based on the type of transaction:
 
@@ -993,6 +993,8 @@ where it asserts that
 6. The transaction's gas limit should be lesser than the value taken by subtracting the "last receipt item of the block's cummulative gas value" from the block's total gas limit.
 
 We also assume that if `!SENDER(TX) = NULL` then `#STATE[!SENDER(TX)]codehash = !SPL-FUNC_KEC(())`, `#STATE[!SENDER(TX)]nonce = 0`, `#STATE[!SENDER(TX)]balance = 0`
+
+
 
 
 
