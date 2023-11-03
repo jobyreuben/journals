@@ -3,6 +3,7 @@ title: Ethereum Mellowpaper (Rewritten Yellowpaper's Soft Version)
 description: A Secure Decentralized Generalized Transaction Ledger
 date: 2023-09-20
 toc : true
+giscus : true
 ---
 
 *Berlin version 2bcdb2d – 2023-08-25*

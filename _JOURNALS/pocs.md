@@ -3,6 +3,7 @@ title: Proof of Contract Stake (PoCS) - First Developer Centric Consensus Mechan
 description: Forging Secure Public Networks through Staking Smart Contracts
 date: 2023-07-15
 toc : true
+giscus : true
 ---
 
 ## Abstract
