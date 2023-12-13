@@ -1,76 +1,75 @@
 <!-- giscus theme -->
 <script>
-    // Function to set the Giscus data-theme attribute
-    function setGiscusTheme(themeVariable) {
-      var giscusScript = document.querySelector("script[src='https://giscus.app/client.js']");
-      giscusScript.setAttribute("data-theme", themeVariable);
-    }
-    
-    // Function to handle theme changes
-    function handleThemeChange() {
-      var isLightTheme = localStorage.getItem("theme") === "light";
-      var themeVariable = isLightTheme ? "light_protanopia" : "dark_protanopia";
-  
-      // Update the Giscus data-theme attribute
-      setGiscusTheme(themeVariable);
-    }
-  
-    // Initially set the Giscus data-theme attribute
-    handleThemeChange();
-  
-    // Listen for theme changes and update the Giscus data-theme
-    window.addEventListener("storage", function (event) {
-      if (event.key === "theme") {
-        handleThemeChange();
-      }
-    });
-  </script>
-  
-  <!-- Mermaid -->
+  // Function to set the Giscus data-theme attribute
+  function setGiscusTheme(themeVariable) {
+    var giscusScript = document.querySelector("script[src='https://giscus.app/client.js']");
+    giscusScript.setAttribute("data-theme", themeVariable);
+  }
 
-  <script>
-    // Add class to the pre element
-    document.addEventListener('DOMContentLoaded', function () {
-        var preElements = document.querySelectorAll('pre code.language-mermaid');
-        preElements.forEach(function (codeElement) {
-    // Add class to the parent pre element
-        odeElement.parentNode.classList.add('premermaid');
-        });
-    });
+  // Function to handle theme changes
+  function handleThemeChange() {
+    var isLightTheme = localStorage.getItem("theme") === "light";
+    var themeVariable = isLightTheme ? "light_protanopia" : "dark_protanopia";
+
+    // Update the Giscus data-theme attribute
+    setGiscusTheme(themeVariable);
+  }
+
+  // Initially set the Giscus data-theme attribute
+  handleThemeChange();
+
+  // Listen for theme changes and update the Giscus data-theme
+  window.addEventListener("storage", function (event) {
+    if (event.key === "theme") {
+      handleThemeChange();
+    }
+  });
 </script>
 
-<!-- Pseudocode -->
+<!-- Mermaid -->
+
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-      // Get all code blocks with the language "pseudocode"
-      var codeBlocks = document.querySelectorAll('code.language-pseudocode');
-
-      codeBlocks.forEach(function (codeBlock, index) {
-          // Create a <pre> element with a unique ID
-          var preElement = document.createElement('pre');
-          preElement.id = 'algorithm_' + index;
-
-          // Set the content of the <pre> element to the code content
-          preElement.textContent = codeBlock.textContent.trim();
-
-          // Replace the code block's parent with the <pre> element
-          codeBlock.parentNode.replaceWith(preElement);
-
-          // Render the pseudocode for each <pre> element
-          pseudocode.renderElement(document.getElementById('algorithm_' + index), { lineNumber: true });
+  // Add class to the pre element
+  document.addEventListener('DOMContentLoaded', function () {
+      var preElements = document.querySelectorAll('pre code.language-mermaid');
+      preElements.forEach(function (codeElement) {
+          // Add class to the parent pre element
+          codeElement.parentNode.classList.add('premermaid');
       });
   });
 </script>
 
+<!-- Pseudocode -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Get all code blocks with the language "pseudocode"
+    var codeBlocks = document.querySelectorAll('code.language-pseudocode');
+
+    codeBlocks.forEach(function (codeBlock, index) {
+        // Create a <pre> element with a unique ID
+        var preElement = document.createElement('pre');
+        preElement.id = 'algorithm_' + index;
+
+        // Set the content of the <pre> element to the code content
+        preElement.textContent = codeBlock.textContent.trim();
+
+        // Replace the code block's parent with the <pre> element
+        codeBlock.parentNode.replaceWith(preElement);
+
+        // Render the pseudocode for each <pre> element
+        pseudocode.renderElement(document.getElementById('algorithm_' + index), { lineNumber: true });
+    });
+});
+</script>
+
 
 <!-- markdownify -->
-
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-      var aContent = document.getElementById('acontent');
-      var markdownContent = aContent.innerHTML;
-      aContent.innerHTML = marked(markdownContent);
-  });
+document.addEventListener('DOMContentLoaded', function () {
+    var aContent = document.getElementById('acontent');
+    var markdownContent = aContent.innerHTML;
+    aContent.innerHTML = marked(markdownContent);
+});
 </script>
 
 
