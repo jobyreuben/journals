@@ -6,13 +6,6 @@ toc : true
 giscus : true
 ---
 
-```mermaid
-graph LR
-  v_1 --e_1 = v_1, v_2--> v_2
-  v_2 --e_2 = v_2, v_(2-1)--> ...
-  ... --e_i = v_i, v_(i-1)--> v_n
-```
-
 *Berlin version 2bcdb2d – 2023-08-25*
 
 _Mellowpaper represents readable soft-version of the Ethereum Yellowpaper_
