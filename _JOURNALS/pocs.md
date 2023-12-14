@@ -448,19 +448,14 @@ Contract Owners can initiate an extrinsic call, for claiming rewards, to the con
 
 ### Suspension as Penalty
 
-TODO
 
-<!---
 Penalties can be imposed upon validators who engage in activities that can be construed as malicious attacks conducted by network nodes. Such actions can result in the suspension of a validator for a specified number of blocks, placing them in an idle position. As the Stake Score is both non-fungible and non-transferable, rendering it unusable outside the staking environment, reducing or slashing it is ineffective in mitigating the severity of attacks in Substrate's NPoS <> PoCS Model. Suspending a validator proves to be an effective approach to penalize node operation costs and to notify bonded contract owners to reconsider their validator choices in order to prevent their stake from becoming idle.
 
-The seriousness of a dishonest act is assessed by multiplying the gravity of the offense by the `warmTime`, which is set at 75,000 blocks. Given Substrate's 6-second block time, this translates to an average duration of approximately 5 days. The warmTime serves as a defined period for any actions necessitating a gradual adjustment or preparation and can be used for multiple scenarios.
--->
+The seriousness of a dishonest act is assessed by multiplying the gravity of the offense by the `warmTime`, which can be set at `x` blocks. Given Substrate's 6-second block time, with an average of `75,000` blocks translates to an average duration of approximately 5 days. The warmTime serves as a defined period for any actions necessitating a gradual adjustment or preparation and can be used for multiple scenarios.
 
 ### Simple Democracy
 
-TODO
 
-<!--
 In a Simple-Democracy Setup, Bond holders have the exclusive authority to put forward democracy proposals, encompassing matters such as runtime upgrades and treasury affairs, which are associated with pallets that may coupled to pallet_democracy. Those who are not the proposers of a given proposal, including Bond Holders (Validators), have the authority to cast their votes as either "Yay" or "Nay." It's important to note that once a vote transaction is confirmed, it cannot be altered.
 
 Each proposal is allotted a pre-voting period during which the appropriate vote time is determined. This determination takes into consideration the complexity of assessing the proposal. For instance, runtime upgrades with extensive changes may necessitate varying evaluation times, subject to the resources available to the voters.
@@ -472,12 +467,15 @@ In cases where the proposer's minimum vote time is deemed impractical or the min
 The voteTime for the Main Voting phase begins and concludes at the block height predetermined during the pre-vote stage. During the Main Voting, Bond Holders have the ability to cast "Yay" or "Nay" votes for the proposal. If there are no votes cast after the Vote Time Limit has expired, the validator will face a suspension period for validating blocks, similar to the penalty period. This suspension lasts for the sum of warmTime and voteTime following the enactment of the vote.
 
 This simple-democracy system operates without an internal council or external proposals, relying on a straightforward and direct on-chain democracy voting process. Validators, as node runners, are responsible for proposing changes, and PoCS contract developers can operate their own nodes staking their contracts to submit proposals. Developers are given chance to offer voting benefits to their `delegateTo` validators, effectively designating them as voteDelegates.
--->
 
 ### Work Flow UML
 
 TODO: Detailed Workflow UML after Reference Implementation
 
 ### Normalization Risks
+
+TODO
+
+### Masking Bonds (Anonymous Staking)
 
 TODO
