@@ -4,14 +4,14 @@ description: Forging Secure Public Networks through Staking Smart Contracts
 date: 2023-07-15
 toc : true
 giscus : true
-contributors : Purva-Chaudhari, I-Corinthian
+contributors : jobyreuben, Purva-Chaudhari, I-Corinthian
 ---
 
-## Abstract
+# Abstract
 
 Proof of Contract Stake (PoCS) is an innovative staking system utilizing contract gas history to select block producers. It merges proof-of-work and proof-of-stake, introducing "code-mining" by incentivizing developers to secure the network. Contracts' stake scores depend on age, reputation, and gas use, deterring collusion attacks. PoCS eliminates the "nothing at stake" attack with a non-fungible non-transferable unit of scarcity to stake. A stake accumulation attack in PoCS is time constraint and patterned which can be easily detected, escalates costs over time, and cannot be expedited with any external resources.
 
-## Introduction
+# Introduction
 
 The Proof of Contract Stake (PoCS) is an alternative staking mechanism to Proof of Stake that utilizes the history of gas consumption from contracts as a scarce and limited resource. This resource can be staked to elect/select block producers. PoCS introduces a hybrid proof-of-work and proof-of-stake model, offering an environmentally sustainable solution that can be relied upon for a public blockchain's network security. This consensus model focuses on developers, providing them with an incentive mechanism for contributing to network security.
 
@@ -25,7 +25,7 @@ To counter this issue, PoCS incorporates a built-in contract reputation model th
 
 PoCS can bring in public good projects where Smart Contract Developers within this ecosystem can benefit from PoCS staking by availing an alternative contract staking business model as opposed to traditional token-based / platform fee models.
 
-## Goals
+# Goals
 
 1.  **Innovate Security Approach:** PoCS introduces a novel method for enhancing blockchain security through "code mining". This novel approach enables any contract to contribute to security by possessing a specific and unalterable "stake score".
 2.  **Revolutionize Business Methods:** PoCS aims to reshape how blockchain-based businesses generate income. By implementing the concept of staking programs, as opposed to relying solely on traditional tokens or platform fees, PoCS offers an alternative avenue for projects built on these networks to thrive and avoids scams, and rug-pulls.
@@ -319,13 +319,13 @@ The limitations of Proof of Contract Stake (PoCS) are primarily rooted in its de
 1.  **Dependency on Smart Contract Blockchains**: PoCS can only be effectively utilized on a smart contract-enabled blockchain. Since it relies on monitoring and evaluating the usage of individual contracts, it requires the underlying blockchain to support *smart contracts*. This limitation restricts its applicability to platforms that do not have smart contract functionality.
 2.  **Limited Applicability to Non-Contract-based Transactions**: PoCS's design is tailored explicitly for smart contract interactions, which means it may not be suitable or applicable for blockchain use cases that primarily involve *simple transactions* without smart contract involvement.
 
-###  Future Work
+##  Future Work
 
 In terms of future work, our primary focus will be on the development of a fee model named "barter-gas", designed for implementation on public blockchains. This model introduces an additional fee transaction as a batch process, allowing expected contract state updates taken as fees with flexible benefits. Notably, this system enables validators to accept these benefits as fees, streamlining a blockchain to be adopted globally without the reliance on a native token for fees, since PoCS replaces the security reliance of tokens in a public smart contract network. Furthermore, our ongoing research will address potential attack vectors associated with the Proof of Contract Stake (PoCS) mechanism. We will also explore practical implementation models for PoCS concepts, contributing to the advancement of public blockchains.
 
 In addition to these efforts, we will actively work on creating an implementation of a dedicated PoCS test-net. This test-net will serve as an experimental platform to encourage developers to utilize on-chain libraries and delve into PoCS, exploring its staking advantages. We aim to simplify cross-contract calls, making them lightweight and developer-friendly within this environment. By providing a practical testing ground, we intend to facilitate wider adoption and comprehension of PoCS within the blockchain community, promoting innovation and enhancing the functionality of blockchain ecosystems.
 
-##  PoCS Simulations (Ethereum PoCS)
+#  PoCS Simulations (Ethereum PoCS)
 
 We will simulate PoCS on Ethereum Transaction History and prove how PoCS behaves if Ethereum used PoCS from its genesis block and what the results look like.
 
@@ -333,7 +333,7 @@ Ethereum History Queried/Downloaded from [BigQuery crypto.ethereum](https://bigq
 
 You can find the simulation scripts that output the following charts on the [source repository](https://github.com/jobyreuben/journals/tree/gh-pages/simulation/pocs).
 
-###  Ethereum on PoCS Stake Supply
+##  Ethereum on PoCS Stake Supply
 
 Simulating Total Network's Stake supply from Ethereum History of transactions. This provides us with the total network's Stake per time period (1 month) and its supply curve. Since there is uncertainty of staking age, we will assume that the contracts haven't changed validators since creation.
 
@@ -343,7 +343,7 @@ Simulating Total Network's Stake supply from Ethereum History of transactions. T
 - Notably, a significant shift occurs around Month 50, marking the commencement of Ethereum's fourth year. During this phase, contract transaction stake scores exhibit a recurring pattern of doubling each month. This surge can be attributed to the simultaneous rise in gas consumption and the accumulation of reputation within the Ethereum PoCS simulated ecosystem.
 - It's important to acknowledge that this analysis rests upon a simplified simulation based on accessible metrics, namely gas consumed and contract reputation. However, the intricacies surrounding stake age uncertainty introduce an element of unpredictability. This uncertainty factor surrounding stake age contributes to increasing security measures. By obfuscating the exact costs and timeframes required for a malicious contract to inflate a 51% stake.
 
-###  Staking Uniswap on Ethereum PoCS
+##  Staking Uniswap on Ethereum PoCS
 
 Simulating Uniswap V1, V2, V3 on Ethereum running Proof of Contract Stake and providing results of network to stake ratio. This provides information on the total stake held by Uniswap Developers compared to Ethereum PoCS total network stake on specific slots of a time period (typically every 1 month). Since there is uncertainty of staking age, we will assume that the contracts haven't changed validators since creation. Also, there are monthly staking rewards provided by assuming that the sample size of the validator's activity is large (With the Law of Large Numbers Probability) since block author selection the stake rewards come with uncertainty to simulate.
 
@@ -357,7 +357,7 @@ Via the [simulation scripts](https://github.com/jobyreuben/journals/tree/gh-page
 - Presently, with Ethereum employing the Proof of Contract Stake (PoCS) mechanism, Uniswap consistently generates an income of over 20,000 Ether a month. At an estimated average conversion rate of 1 Ether to 1000 USD, this equates to approximately 20 million USD per month which accrues revenue amounting to around 240 million USD annually, without factoring in development and operational costs. Given that Uniswap Labs maintains a staff of fewer than 50 employees, this level of profitability within a constrained Ethereum-only ecosystem surpasses initial expectations.
 - It's important to acknowledge that the landscape can shift due to factors such as changes in the blockchain ecosystem and transaction fees paid, among others.
 
-###  Ethereum PoCS Majority Stake Attacks
+##  Ethereum PoCS Majority Stake Attacks
 
 To simulate a collusion attack, we would need to inject attack transactions into the Ethereum transaction history discreetly. These attack transactions, along with their gas usage, are calculated from the existing contract transaction's gas consumption that contributes to the network's stake supply in each block. By integrating attack transactions into the blocks alongside regular contract transactions, we can construct a transaction history that represents a colluded scenario. The gas consumption of attack transactions per block of per monthly range can be controlled by a parameter denoted as "K", indicating the proportion (x percent) of gas drawn from the sum of contract transactions within a specific block.
 
@@ -365,7 +365,7 @@ In practical scenarios, attack transactions might be identified and dismissed by
 
 While accumulating native tokens in PoS Chains are permissible, and PoW allows for a centralized pool structure, PoCS gives a viable opportunity to prevent attack transactions and also time constraint to avoid such scenarios.
 
-#### Ethereum PoCS 10% Block Collusion Attack
+### Ethereum PoCS 10% Block Collusion Attack
 
 ![10% block collusion attack- Ethereum PoCS](/assets/pocs/10-of-block.png)
 
@@ -373,7 +373,7 @@ While accumulating native tokens in PoS Chains are permissible, and PoW allows f
 - Observing the simulation outcomes, even with an intrusion of attack transactions constituting 10% of all blocks, commencing from the fourth month, it remains unfeasible for the attacker to attain a 51% stake.
 - This underscores the efficacy of PoCS in introducing a time-constraint element. This mechanism effectively safeguards the network from attackers, even when subjected to a 10% block attack, due to the limitations imposed on the time required to amass a significant stake.
 
-#### Ethereum PoCS 20% Block Collusion Attack
+### Ethereum PoCS 20% Block Collusion Attack
 
 ![20% block collusion attack- Ethereum PoCS](/assets/pocs/20-of-block.png)
 
@@ -384,17 +384,15 @@ While accumulating native tokens in PoS Chains are permissible, and PoW allows f
 - Within the currently available existing consensus models, the detection and reversal of stake accumulation attack transactions, along with the parties orchestrating stake accumulation, are intricate, probabilistic tasks that may involve false positives. Resolving such instances would necessitate a comprehensive hard fork to the chain that impacts all non-attack transactions. The implementation of Proof of Contract Stake (PoCS) effectively counters such potential scenarios, as illustrated by the simulation results.
 - Notably, since the attack operates by compensating validators through fees, the feasibility of the attack is also contingent on the value of the native token or the designated fee-paying token/s. Fluctuations in token value directly impact the viability and cost of executing the attack.
 
-# Implementation Design
+# Substrate (PoCS)
 
-## Substrate (PoCS)
+*Special Thanks to [Ajay Joshua](https://github.com/I-Corinthian) and [Purva Chaudhari](https://github.com/Purva-Chaudhari) for contributing to the conceptualization of the Substrate-based Proof of Contract Stake (PoCS) design*
 
-*Special Thanks to Ajay Joshua and Purva Chaudhari for contributing to the conceptualization of the Substrate-based Proof of Contract Stake (PoCS) design*
-
-### Substrate's Native NPoS Staking Model
+## Substrate's Native NPoS Staking Model
 
 Substrate, as a modular blockchain framework, already offers a Nominated Proof of Stake (NPoS) staking model (Currently used by Polkadot for its Relay Chain). This model primarily revolves around the collaboration of validators and nominators. A critical aspect of this model involves bonding a certain stash of the native token of the blockchain to a validator or nominator account. With lesser modifications to the existing staking mechanism we would need to propose PoCS pallets to provide interoperability among existing infrastructure.
 
-### Per-Transaction Stake Score
+## Per-Transaction Stake Score
 
 Substrate diverges from the conventional gas-based approach by employing a time-based mechanism called "weight", also known as "refTime". In this context, it is essential to elucidate the suitability of refTime as a viable alternative to the traditional gas concept. 
 
@@ -424,7 +422,7 @@ Here are the contract fields explained in more detail:
 
 These contract fields collectively facilitate the dynamic and effective operation of the contract within the blockchain ecosystem, allowing it to build reputation, engage with specific validators, and actively participate in the staking system.
 
-### Bonding to Validator
+## Bonding to Validator
 
 Ensuring the seamless integration of the Proof of Contract Stake (PoCS) with Substrate's existing pallets is of paramount importance. In a standard Nominated Proof of Stake (NPoS) system, an account is required to stake a specific amount of the native token balance (currency), designating it to a stash account (validator account), controller account (for bonding and unbonding), and a payee (responsible for receiving rewards).
 
@@ -438,7 +436,7 @@ Furthermore, in order to establish a trustless PoCS staking environment, it is a
 
 During each transaction, the contract's storage fields diligently maintain a record of the contract's cumulative stake score. The per-transaction stake score is then added as an extra bond, represented in token balances, to the existing contract's bonded (staked) validator. The contract deployer, after deploying their contract, is required to initiate an additional call to update their delegateTo field and bond their contract to the validator. This step allows them to include their stake score as an additional contribution to the bond, enhancing the overall stake in the network.
 
-### Non-Custodial Rewards
+## Non-Custodial Rewards
 
 Validators have the autonomy to make a strategic choice between being a trusted or trustless validator, primarily driven by considerations related to reward distribution. This decision hinges on whether rewards are held by an external account requiring signatures, potentially exposing them to the risk of bad acting. Conversely, validators can opt for a non-custodial approach by opting for a  smart contract based controller account (responsible for receiving rewards) equipped with predefined rules which can be audited openly.
 
@@ -446,16 +444,13 @@ It is essential for every contract deployer (staker) to be aware of their valida
 
 Contract Owners can initiate an extrinsic call, for claiming rewards, to the controller smart contract. This call, in turn, can trigger an internal call to contracts pallet adapted for the PoCS version, utilizing various methods available within the Substrate framework, such as Chain Extensions. The purpose of this call is to verify the authenticity of the caller, ensuring that the caller is the rightful owner of the contract address that is bonded to the validator's controller account. This rigorous verification process reinforces the trustless nature of the reward distribution system, enhancing the overall security and integrity of the network.
 
-
-### Suspension as Penalty
-
+## Suspension as Penalty
 
 Penalties can be imposed upon validators who engage in activities that can be construed as malicious attacks conducted by network nodes. Such actions can result in the suspension of a validator for a specified number of blocks, placing them in an idle position. As the Stake Score is both non-fungible and non-transferable, rendering it unusable outside the staking environment, reducing or slashing it is ineffective in mitigating the severity of attacks in Substrate's NPoS <> PoCS Model. Suspending a validator proves to be an effective approach to penalize node operation costs and to notify bonded contract owners to reconsider their validator choices in order to prevent their stake from becoming idle.
 
 The seriousness of a dishonest act is assessed by multiplying the gravity of the offense by the `warmTime`, which can be set at `x` blocks. Given Substrate's 6-second block time, with an average of `75,000` blocks translates to an average duration of approximately 5 days. The warmTime serves as a defined period for any actions necessitating a gradual adjustment or preparation and can be used for multiple scenarios.
 
-### Simple Democracy
-
+## Simple Democracy
 
 In a Simple-Democracy Setup, Bond holders have the exclusive authority to put forward democracy proposals, encompassing matters such as runtime upgrades and treasury affairs, which are associated with pallets that may coupled to pallet_democracy. Those who are not the proposers of a given proposal, including Bond Holders (Validators), have the authority to cast their votes as either "Yay" or "Nay." It's important to note that once a vote transaction is confirmed, it cannot be altered.
 
@@ -469,14 +464,30 @@ The voteTime for the Main Voting phase begins and concludes at the block height 
 
 This simple-democracy system operates without an internal council or external proposals, relying on a straightforward and direct on-chain democracy voting process. Validators, as node runners, are responsible for proposing changes, and PoCS contract developers can operate their own nodes staking their contracts to submit proposals. Developers are given chance to offer voting benefits to their `delegateTo` validators, effectively designating them as voteDelegates.
 
-### Work Flow UML
+## Contract & Staking Work Flow
 
 TODO: Detailed Workflow UML after Reference Implementation
 
-### Normalization Risks
+## Normalization Risks
 
 TODO
 
-### Masking Bonds (Anonymous Staking)
+## PoCS-Polkadot Parachain Collator Election
+
+Polkadot's Relaychain Protocol offers a fundamental advantage which can be leveraged, wherein the requirement for honesty from collators is required to only a single honest node. This is made possible by the security infrastructure provided by the Polkadot Relay Chain's protocols such as NPoS, BABE and GRANDPA, which handles the critical functions of providing security for the parachain and validation via the parachain's runtime state transition function. These elements allows for the implementation of a collator election mechanism based on a stake auction model.
+
+This Stake-Auction model provides a system where collators stake their bonds for securing slots and participate in an epoch-based auction to secure the right to be selected as block collators to build blocks. Proof of Contract Stake (PoCS) leverages contract's stake bonds created to participate in the Auction. The collators with the highest stakes in the PoCS system become prime candidates for building blocks, which are subsequently dispatched to the randomly selected parachain block validators from the Polkadot Relay Chain Protocol for Availability and Validity process.
+
+The consequences for a collator failing to author a block in the designated slot incurs a suspension similarly described in above sections. Additionally a restriction is levied for collators to monopolize sequential slot auctions. The bonds staked by collators are released at the conclusion of each epoch. Auctions are a recurring event, transpiring every n-1 epoch for an upcoming epoch, where each epoch shall span a configurable time e.g., a day, divided into slots of a configurable time e.g., 5 minutes, where each slot can occupy a block and total slots shall include auctioned and non-auctioned slots.
+
+At the pocs-genesis block's configuration, the total auction slots are determined by the factor or the positive integers that evenly divide the configured length of total slots per epoch for the parachain. The remaining sequential slots are designated as non-auction slots. Following each epoch's auction, if all auction slots are secured by unique collator nodes, the total auction slots are updated based on the next factor and vice versa. Collators are automatically assigned to non-auction slots following the auction-slot pattern repeated until epoch slots are filled, ensuring collators participation in building blocks for the entire epoch. 
+
+For instance, in a scenario where the total epoch time is configured as 24 hours with each slot lasting 5 minutes, resulting in a total of 288 slots, the pocs-genesis configuration may commence with two collator node and progressively increase to 3,4,6,8,..,288 as they are factors of 288 slots. This approach of having unique values in the auction slots heightens competition, thereby incentivizing the need for more nodes with substantial bond stakes.
+
+This Stake-Auction model adds sophistication through the practice of pre-announcing block collators for forward compatibility of building a fully-abstract network with further research proposals. This strategic move yields several benefits, including enhanced transparency, simplified mechanism, reduced uncertainty in the collator selection process, and the facilitation of better coordination among network participants.
+
+## Masking Bonds (Anonymous Staking)
+
+### Possessive Attack
 
 TODO

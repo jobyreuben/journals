@@ -6,3 +6,9 @@ vendor
 settings.json
 drafts
 .DS_Store
+ars.md
+barter.md
+cs.md
+icn_spec.md
+assets/cs
+.vscode

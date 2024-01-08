@@ -2,6 +2,7 @@
 title: Ethereum Mellowpaper (Rewritten Yellowpaper's Soft Version)
 description: A Secure Decentralized Generalized Transaction Ledger
 date: 2023-09-20
+contributors : jobyreuben
 toc : true
 giscus : true
 ---
@@ -1018,4 +1019,4 @@ We also assume that if `!SENDER(TX) = NULL` then `#STATE[!SENDER(TX)]codehash = 
 
 
 
-### Note : I'm rewriting the yellowpaper during my free-time hence this is an ongoing work.
+{% include alerts/warning.html content="I'm rewriting the yellowpaper during my free-time hence this is an ongoing work."%}
