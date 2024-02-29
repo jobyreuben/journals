@@ -450,20 +450,6 @@ Penalties can be imposed upon validators who engage in activities that can be co
 
 The seriousness of a dishonest act is assessed by multiplying the gravity of the offense by the `warmTime`, which can be set at `x` blocks. Given Substrate's 6-second block time, with an average of `75,000` blocks translates to an average duration of approximately 5 days. The warmTime serves as a defined period for any actions necessitating a gradual adjustment or preparation and can be used for multiple scenarios.
 
-## Simple Democracy
-
-In a Simple-Democracy Setup, Bond holders have the exclusive authority to put forward democracy proposals, encompassing matters such as runtime upgrades and treasury affairs, which are associated with pallets that may coupled to pallet_democracy. Those who are not the proposers of a given proposal, including Bond Holders (Validators), have the authority to cast their votes as either "Yay" or "Nay." It's important to note that once a vote transaction is confirmed, it cannot be altered.
-
-Each proposal is allotted a pre-voting period during which the appropriate vote time is determined. This determination takes into consideration the complexity of assessing the proposal. For instance, runtime upgrades with extensive changes may necessitate varying evaluation times, subject to the resources available to the voters.
-
-The Pre-Vote phase is set to a duration specified as "warmTime", as seen in Penalty Section. During this Pre-Vote voteTime(`0`, `minVoteTime`, `minVoteTime*2`), voters are presented with the options to set the `voteTime` for the specific proposal. The options include "0", the minimum vote time as defined by the proposer, or twice the minimum vote time. Once the warmTime period concludes, the outcome becomes pivotal. If the majority of votes are in favor of "0", the proposal is immediately rejected, and the next proposal enters the pre-vote stage. However, if another option, such as `minVoteTime` or `minVoteTime*2`, receives the majority of votes, the total block height period corresponding to the chosen option will commence, initiating the main voting process. 
-
-In cases where the proposer's minimum vote time is deemed impractical or the minimum vote time*2 is undervalued, validators have the opportunity to cast a "0" vote, resulting in the rejection of the proposal.
-
-The voteTime for the Main Voting phase begins and concludes at the block height predetermined during the pre-vote stage. During the Main Voting, Bond Holders have the ability to cast "Yay" or "Nay" votes for the proposal. If there are no votes cast after the Vote Time Limit has expired, the validator will face a suspension period for validating blocks, similar to the penalty period. This suspension lasts for the sum of warmTime and voteTime following the enactment of the vote.
-
-This simple-democracy system operates without an internal council or external proposals, relying on a straightforward and direct on-chain democracy voting process. Validators, as node runners, are responsible for proposing changes, and PoCS contract developers can operate their own nodes staking their contracts to submit proposals. Developers are given chance to offer voting benefits to their `delegateTo` validators, effectively designating them as voteDelegates.
-
 ## Contract & Staking Work Flow
 
 TODO: Detailed Workflow UML after Reference Implementation
