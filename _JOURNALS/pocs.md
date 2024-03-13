@@ -4,7 +4,7 @@ description: Forging Secure Public Networks through Staking Smart Contracts
 date: 2023-07-15
 toc : true
 giscus : true
-contributors : jobyreuben, Purva-Chaudhari, I-Corinthian
+contributors : jobyreuben
 ---
 
 # Abstract
@@ -14,8 +14,6 @@ Proof of Contract Stake (PoCS) is an innovative staking system utilizing contrac
 # Introduction
 
 The Proof of Contract Stake (PoCS) is an alternative staking mechanism to Proof of Stake that utilizes the history of gas consumption from contracts as a scarce and limited resource. This resource can be staked to elect/select block producers. PoCS introduces a hybrid proof-of-work and proof-of-stake model, offering an environmentally sustainable solution that can be relied upon for a public blockchain's network security. This consensus model focuses on developers, providing them with an incentive mechanism for contributing to network security.
-
-![PoCS-Overview](/assets/pocs/pocs.jpeg)
 
 Contract storage fields are expanded to allow the validator's information to be stored with specific conditions where each contract's stake score is determined based on various parameters, including its staking age, reputation, and total metered gas consumption. These factors can be delegated to a chosen validator by the contract's owner.
 
@@ -125,30 +123,6 @@ $$PoCS(C_r)=s$$
 
 In PoCS, the contract deployer is provided with the non-custodial model to register his `delegateTo` address of the validator and the validator holds no authority over the staked contracts, thus providing a non-custodial model with only slashing risk associated with lesser returns on rewards by validators not frequently chosen for block production.
 
-##  Validator Slashing
-
-Originally, Proof of Stake (PoS) consensus mechanisms introduced validator staking, where network participants could lock up their cryptocurrency as collateral to become validators and participate in block creation and validation.
-
-$$PoS = St_{V_n} - Sl_{am}$$
-
-However, the PoS model has since evolved, transitioning from validator staking to **delegated staking (DPoS)** where cryptocurrency holders can delegate their staking power to *nominated validators*, allowing them to represent the interests of these delegators in the network. Despite this shift, a challenge remains in the form of slashing where holders lose a portion of their staked funds, for instances of misbehaviour by validators.
-
-$$DPoS = St_V = \sum_{1}^{n}D$$
-
-$$Sl_D = D_n - (D_n \times \frac{Sl_{am}}{St_{V_n}})$$
-
-In the context of Proof of Contract Stake (PoCS) consensus mechanisms, slashing *delegated units* of scarce resource gas consumption does not pose a risk for stakers, hence, it is implemented in a different approach. Instead of penalizing nominators or delegators directly, *slashing is directly imposed on validators* by increasing their **minimum staking requirement** ($S_{min}$) permanently when they engage in misbehavior. This is accomplished by posting evidence of the validator's misbehavior as a transaction on the blockchain.
-
-$$PoCS = St_{min}(V_n) = St_{min} + Sl_{am}$$
-
-Furthermore, to deter validators from engaging in such activities, the *minimum stake* required for the particular validator to participate in block authoring ( E.g., using [BABE](https://research.web3.foundation/Polkadot/protocols/block-production/Babe) in [Substrate](https://docs.substrate.io/), etc) is incremented, making it more costly for misbehaving validators to continue participating in the block creation process.
-
-To author PoCS Blocks,
-
-$$St(V_n) = \sum_{1}^{n}D > St_{min}(V_n)$$
-
-This mechanism ensures that the network's security and reliability are upheld while preventing the need to penalize individual delegators for their validator's actions. This is a **permanent slashing model** applied to the validators similar to the permanent burning of tokens.
-
 ##  Contract Reputation
 
 The integration of Proof of Contract Stake (PoCS) introduces a potential attack vector. In the initial stages of a network incorporating PoCS, there exists a vulnerability where validators may collude with contracts staked to themselves, employing malicious code with the intent to *escalate gas consumption* (PoCS's scarce unit) and enhance their chances of authoring blocks. Although some block candidate announcing models like Polkadot's BABE consensus effectively avoid consecutively allowing validators with the largest stake holdings to produce blocks, many algorithms still rely on the *largest stakeholder* model. Moreover, **collusion attacks** can be executed when gas prices are low, taking advantage of the market value associated with the native token charged for transaction fees.
@@ -196,45 +170,27 @@ PoCS's contract reputation trustlessly evaluates a contract's reputation based o
 
 ##  Contract Stake Score
 
-In PoCS consensus, the `stake score` of a contract plays a crucial role in determining the proportion of the overall stake delegated to validators contributed by all contract owners. The stake score is a *deterministic value* calculated based on several factors, such as the contract's `gas consumption` ($g$),`reputation` ($R$), `recentBlockHeight` ($r$), and `delegatedAt` ($A$), all of which are independent but the product of it is proportional to the stake score by defining $k=1$. By considering these elements, the system can effectively prevent various collusion attacks and promote a fair distribution of rewards to *delegators* (stakers/developers as delegators). This approach fosters a healthy and trusted network environment, as it incentivizes long-term commitment to the network and ensures that validators and contract developers are duly rewarded for their contributions.
+In PoCS consensus, the `stake_score` of a contract plays a crucial role in determining the proportion of the overall stake delegated to validators contributed by all contract owners. The stake score is a *deterministic value* calculated based on several factors, such as the contract's `gas_consumption` ($g$),`reputation` ($R$), and `recentBlockHeight` ($r$). By considering these elements, the system can effectively prevent various collusion attacks and promote a fair distribution of rewards to staked contract owners. This approach fosters a trusted network environment, as it incentivizes long-term commitment to the network and ensures that validators and contract developers are duly rewarded for their contributions.
 
-$$StakeScore (SS)=k \times (r-A) \times  R  \times g$$
+$$\text{stake_score} = \text{stake_score} + (R  \times g)$$
 
 **Claim**: The Stake Score formula improves randomized results, competition, long-term commitment, and fair reward distribution, and prevents collusion with malicious intent.
 
- | Property | Proof Statements |
-   |----------|----------|
-   | Unpredictable | Contracts cannot predict the usage of users which influences the `gas consumption` ($g$) |
-   | Competition | Contracts compete for higher $SS$ by being more active, reputable, and optimizing gas consumption for users to engage |
-   | Long-Term Commitment | As $SS$ is influenced by Recent Block Height $r$, long-term commitment is encouraged. |
-   | Fair Reward Distribution | $SS$ based on genuine usage, reputation, and efficiency, not just delegated stake. |
-   | Scarcity Dilution | Contracts with positive attributes can compete effectively, diluting scarcity concentration.|
+| Property | Proof Statements |
+|----------|----------|
+| Unpredictable | Contracts cannot predict the usage of users which influences the `gas consumption` ($g$) |
+| Competition | Contracts compete for higher $\text{stake_score}$ by being more active, reputable, and optimizing gas consumption for more users to engage with less economic costs|
+| Long-Term Commitment | A $\text{stake_score}$ is influenced by `reputation` $R$, hence long-term commitment is encouraged. |
+| Fair Reward Distribution | $\text{stake_score}$ based on genuine usage, reputation, and efficiency, not just delegated stake. |
+| Scarcity Dilution | Contracts with positive attributes can compete effectively with other contracts, diluting scarcity concentration.|
 
-**Sensitivity Analysis of Stake Score:**
-
-Sensitivity with Respect to *Recent Block Height* ($r$), $\frac{\partial SS}{\partial r} = R \times g$
-
-Sensitivity with Respect to *Delegated Stake at Block Height* ($A$), $\frac{\partial SS}{\partial A} = -R \times g$
-
-Sensitivity with Respect to *Reputation* ($R$), $\frac{\partial SS}{\partial R} = (r - A) \times g$
-
-Sensitivity with Respect to *Gas Consumption* ($g$), $\frac{\partial SS}{\partial g} = (r - A) \times R$
-
-- A higher `recentBlockHeight` ($r$) increases $SS$,incentivizing continued usage to maintain a higher `stake score`.
-- An increase in `stake delegated at block height` ($A$) reduces $SS$, promoting fair distribution by favouring total `age` of stake.
-- Higher `reputation` ($R$) and `gas consumption` ($g$) values increase $SS$, encouraging trustworthy contracts with efficient code.
-
-Let $\mathbb{P}{\text{collusion}}$ be the probability of successfully executing a collusion attack to increase gas consumption for future block authoring by a malicious contract. The Stake Score ($SS$) with `reputation` and `stake age` prevents artificial inflation of the Stake Score, making $\mathbb{P}{\text{collusion}}$ lower over time. With reputation tied to stake, a collusion attack requires cooperation from **2/3 network validators** to execute malicious contracts, making it highly unlikely in a PoCS network. Therefore, $\mathbb{P}{\text{collusion}} < \mathbb{P}{\text{honest}}$, where $\mathbb{P}{\text{honest}}$ is the probability of honest block authoring.
+Let $\mathbb{P}{\text{collusion}}$ be the probability of successfully executing a collusion attack to increase gas consumption for future block authoring by a malicious contract. The Stake Score ($\text{stake_score}$) with `reputation` and `stake age` prevents artificial inflation of the Stake Score, making $\mathbb{P}{\text{collusion}}$ lower over time. With reputation tied to stake, a collusion attack requires cooperation from **2/3 network validators** to execute malicious contracts, making it highly unlikely in a PoCS network. Therefore, $\mathbb{P}{\text{collusion}} < \mathbb{P}{\text{honest}}$, where $\mathbb{P}{\text{honest}}$ is the probability of honest block authoring.
 
 ##  External Call Monetization
 
-To ensure the validity of Proof of Contract Stake (PoCS) in terms of **code mining** and incentivizing individual innovations, the inclusion of external cross-contract calls becomes essential. Within a blockchain transaction, the flexibility exists to contain `public` and `private` calls or execute functions that can modify the contract's *state* while encompassing multiple *external contract calls* executed within the same transaction. While the `gas consumption` (scarce unit in PoCS) metric represents the total gas utilized by the transaction, it should be further broken down or *dissected* to reflect the gas consumed by the *externally called contracts* also. This approach fosters an environment where developers are encouraged to create **interoperable contracts**, enabling seamless communication with other contracts, including **libraries**.
+To ensure the validity of Proof of Contract Stake (PoCS) in terms of **code mining** and incentivizing every individual innovations, the inclusion of external cross-contract calls becomes essential. Within a blockchain transaction, the flexibility exists to contain `public` and `private` calls or execute functions that can modify the contract's *state* while encompassing multiple *external contract calls* executed within the same transaction. While the `gas_consumption` (scarce unit in PoCS) metric represents the total gas utilized by the transaction, it should be further broken down or *dissected* to reflect the gas consumed by the *externally called contracts* also.
 
-Presently, contract deployment sizes increase due to importing libraries inside standalone contracts, containing logic authored by standard developers, programmers, or well-known entities E.g., Openzepplin. By implementing PoCS and *external call monetization*, libraries can be deployed as stateful contract interfaces, acquiring their own stake scores to participate in validator staking and receive staking rewards. These library contracts can be *stateful*, serving as callable entities for end-users or end-application contracts that interact with external libraries deployed as contracts. This system promotes innovation, collaboration, and **monetization of libraries** while supporting the creation of more efficient and interconnected, interoperable smart contract ecosystems.
-
-The present flexibility allowing code reuse without providing *attribution* or monetary rewards can be addressed through **PoCS's open-source monetization initiative**. This initiative would enable stateful libraries to be reused through `external calls` while ensuring that the `gas consumption` associated with these calls is directed back to the library's creator. By deploying *libraries as contract interfaces* and enabling them to monetize their usage while contributing to network security, this approach can foster greater innovation, encouraging developers to forgo the need for *patents* and instead participate in this decentralized and incentivized ecosystem. Through the *diversification of the scarce unit* in PoCS, the network can be strengthened, leading towards a fully decentralized and secure future that eliminates concentration and promotes a healthier, more resilient blockchain network.
-
-##  Saturatable Governance
+## Saturable Governance
 
 On-chain governance in PoS relies on the Chain's native token-holders voting to accept *Improvement Proposals*, thus amending the change via a *manual hard fork* or forkless runtime upgrades in the context of Substrate Standalone Chains / Polkadot's Parachains. This democratic voting has led to positive changes in *Off-chain governance* such as Bitcoin, and [Ethereum](https://ethereum.org/governance) involving consensus from various node providers, miners, stakeholders, etc. However, it also has significant issues, which PoCS aims to solve.
 
@@ -258,28 +214,33 @@ This requires any proposer to actively work on the PoCS Chain, where their `repu
 
 $$SS_{Main}[C_{id}] > 1$$
 
-The participation for voting will include active developers who are monetizing their contracts and working on easing gas consumption by periodically updating their contracts [Upgradable Contracts](https://use.ink/basics/upgradeable-contracts/#replacing-contract-code-with-set_code_hash) in the context of Substrate, unlike dormant holders of a cryptocurrency who are hidden from participating in a long, *chores-like* process.
+The participation for voting will include active developers who are monetizing their contracts and working on easing gas consumption by periodically updating their contracts [Upgradable Contracts](https://use.ink/basics/upgradeable-contracts/##replacing-contract-code-with-set_code_hash) in the context of Substrate, unlike dormant holders of a cryptocurrency who are hidden from participating in a long, *chores-like* process.
 
 With Substrate's forkless runtime upgrades these governance decisions involving upgrades can be made useful to **upgrade run-time automatically** once the voting period ends according to the results onchain.
 
-
 ##  PoCS & Block Authoring
 
-**PoCS is a staking library** that does not serve as a block author announcing & verification module. Instead, it can collaborate with existing *block authoring protocols* like *BABE* in
-Substrate/Polkadot. In Polkadot's consensus, validators must meet a *minimum token staking requirement*, and *nominators* contribute to the selection of validators in the `authority set`. The BABE protocol then randomly assigns `authority set` validators to produce blocks at specific *time slots*. Similarly, the PoCS staking library can identify validators meeting the **minimum staking requirement** and assign them to the `authority set` for block production, following the block authoring protocol's rules.
+The PoCS module is considered a **pre-staking module** and does not function as a block author announcement and verification module. Instead, it can collaborate with existing block authoring protocols such as [NPoS](https://wiki.polkadot.network/docs/learn-consensus#nominated-proof-of-stake)-[BABE](https://wiki.polkadot.network/docs/learn-consensus#block-production-babe) in Substrate/Polkadot or a new staking algorithm customized for it, as PoCS does not rely on conventional token-based bonds but utilizes a scoring mechanism. In most consensus mechanisms, validators must fulfill a **minimum token staking requirement**, and nominators/delegators contribute to the selection of validators to produce specific block heights. The PoCS module can identify validators meeting a minimum staking requirement according to its protocol's criteria, based on `stake_score` rather than token units, and assign them to the block authority set in accordance with the rules of the block authoring protocol. An optimal staking mechanism involves bonding, nominating (delegating), and validating, which are described below to fullfil a PoCS suitable criteria.
 
-$$SS_{min}(Val_n) > \frac{\sum^{n}_{i=1} SS(C_i)}{|A'| + 1}$$
+### Minimum Requirements
 
-$A' = \{ x \mid x \in A \}$ where $A$ is the set of all contracts delegateTo field that has the validator's address.
+Contracts can be bonded similar to locked funds, which requires authorization from the contract deployer. During deployment, the contract can automatically be bonded to the deployer's address themselves at a zero bond value, since bond value can only be increased during calls made to the contract. While the bond can persist with zero value, the nomination or delegation to a validator after contract deployment can posses a certain criteria. For updating the delegate information from default deployer address to a validator address, a minimum requirement can be imposed to avoid unintended attacks; however, [contract's stake_score](#contract-stake-score)'s minimum value cannot be enforced due to its proportional tie to [reputation](#contract-reputation) and gas units. Therefore a constant `reputation` requirement, modifiable according to the network's condition, can be imposed while also introducing a common threat which is prevalent in almost every random validator selection algorithm based public blockchains, [counterfeit attacks](#counterfeit-attacks).
 
-In PoCS to avoid static rules and to offer candidacy options, the minimum requirement is set **dynamic**, influenced by contracts and their `stake scores` associated with it. The *Validator Authority Set* is initialized by PoCS which actively evaluates the minimum requirement per time period requested by the block authoring protocol.
+**Reputation as a minimum requirement** for a bond to be staked or nominated to a validator is similar to a minimum token value's lock-in. Gas Costs are spent to call a contract which are required to increase its reputation, avoids artificial inflation and thus increases costs based on the network's performance and reputation criteria. Upon ensuring a contract's reputation fulfills the minimum reputation requirement, the delegate information can be updated and automated nomination for all epochs is ensured.
 
-##  Non-Custodial Rewards
+Validators' requirements can be tied to the number of contracts they handle as stake/bond. Just as contracts need a certain reputation to nominate a validator, validators must be nominated by a certain number of contracts to initiate validation.
 
-The PoCS (Proof of Contract Stake) protocol offers two distinct implementation models: fully non-custodial and reward custodial. In the fully non-custodial mode, developers can stake their contracts for validation in the PoCS network. Validators have the option to create reward withdrawal contracts, which serve as designated fee-recipient addresses for block production rewards. These withdrawal contracts allow validators to specify arbitrary conditions for withdrawal. This approach lets stakers delegate to a contract account owned by the validator, rather than staking directly to the validator's personal account.
+### Counterfeit Attacks
 
-To ensure fairness and prevent potential attacks, PoCS uses a method during the selection of block authors. It ensures that each validator has only a single contract considered for block authorship. This is achieved by selecting a contract from the list of contracts associated with a validator, and the contract with the lowest address is chosen. By doing this, the impact of staking weights on contract selection is nullified, maintaining fairness within the network.
+Similar to token demand's (market price) influence on staking requirements, a higher availability (liquidity) of a stakable asset might require the network's governance to increase the staking requirement and vice versa when there is higher demand. In PoCS, updating minimum reputation and the minimum contract bonds based on the network performance or other criteria such as cost of creating counterfeit contracts and attempting to increase its reputation for staking purposes, can increase the cost, and costlier to carry out compared to honest production. 
 
+Adopting a largest stake-based block authoring protocol emerges as the most effective alternative to thwart counterfeit attacks. This approach eliminates minimum staking requirements and dynamically adjusts to network conditions. Imposing specific constants as requirements necessitates analysis and updates by a central entity, introducing complexity and time consumption.
+
+## Suspension as Penalty
+
+Penalties can be imposed upon validators who engage in activities that can be construed as malicious attacks conducted by network nodes. Such actions can result in the suspension of a validator for a specified number of blocks, placing them in an idle position. As the Stake Score is both non-fungible and non-transferable, rendering it unusable outside the staking environment, reducing or slashing it is ineffective in mitigating the severity of attacks. Suspending a validator proves to be an effective approach to penalize node operation costs and to notify bonded contract owners to reconsider their validator choices in order to prevent their stake from becoming idle.
+
+The seriousness of a dishonest act is assessed by multiplying the gravity of the offense by the `warmTime`, which can be set at `x` blocks. For example, a 6-second block time, with an average of `75,000` blocks translates to an average duration of approximately 5 days. The `warmTime` serves as a defined period for any actions necessitating a gradual adjustment or preparation and can be used for multiple scenarios.
 
 ##  Majority Stake Attack
 
@@ -299,17 +260,13 @@ $$x=\frac{\text{current network stake} \times 0.51}{0.49}$$
 
 To avoid the attack surface validators can keep priority of transactions that have a higher reputation as opposed to newly created contracts with a lower reputation. Hence Validators' priority of transactions shouldn't focus entirely on the transaction's gas price and additionally to identify the reputation of the transaction via its calling contract's reputation.
 
-$$
-\text{Priority Level} = \begin{cases}
-1, & \text{if } \text{Low Gas Price} \leq 1 \\\\
-2, & \text{if } 1 \leq \text{Mid Gas Price} \leq 2 \\\\
-3, & \text{if } \text{High Gas Price} > 2 \\\\
-\end{cases}
-$$
+## Contract & Staking Work Flow
 
-$$
-\text{TxPriority }[0,1] = \frac{\text{Priority Level}}{6} + \frac{\mathbb{C}(\text{Reputation})-\mathbb{S}(\text{Rep}_{min})}{(\mathbb{S}(\text{Rep}_{max})-\mathbb{S}(\text{Rep}_{min}))\cdot (0.5)}
-$$
+TODO: Detailed Workflow UML after Reference Implementation
+
+## Possessive Attacks
+
+TODO: Validators shall choose only specific transactions to increase their nominator bond values - Resolved in Upcoming BarterGas Protocol.
 
 ##  Limitations
 
@@ -322,8 +279,6 @@ The limitations of Proof of Contract Stake (PoCS) are primarily rooted in its de
 ##  Future Work
 
 In terms of future work, our primary focus will be on the development of a fee model named "barter-gas", designed for implementation on public blockchains. This model introduces an additional fee transaction as a batch process, allowing expected contract state updates taken as fees with flexible benefits. Notably, this system enables validators to accept these benefits as fees, streamlining a blockchain to be adopted globally without the reliance on a native token for fees, since PoCS replaces the security reliance of tokens in a public smart contract network. Furthermore, our ongoing research will address potential attack vectors associated with the Proof of Contract Stake (PoCS) mechanism. We will also explore practical implementation models for PoCS concepts, contributing to the advancement of public blockchains.
-
-In addition to these efforts, we will actively work on creating an implementation of a dedicated PoCS test-net. This test-net will serve as an experimental platform to encourage developers to utilize on-chain libraries and delve into PoCS, exploring its staking advantages. We aim to simplify cross-contract calls, making them lightweight and developer-friendly within this environment. By providing a practical testing ground, we intend to facilitate wider adoption and comprehension of PoCS within the blockchain community, promoting innovation and enhancing the functionality of blockchain ecosystems.
 
 #  PoCS Simulations (Ethereum PoCS)
 
@@ -384,96 +339,7 @@ While accumulating native tokens in PoS Chains are permissible, and PoW allows f
 - Within the currently available existing consensus models, the detection and reversal of stake accumulation attack transactions, along with the parties orchestrating stake accumulation, are intricate, probabilistic tasks that may involve false positives. Resolving such instances would necessitate a comprehensive hard fork to the chain that impacts all non-attack transactions. The implementation of Proof of Contract Stake (PoCS) effectively counters such potential scenarios, as illustrated by the simulation results.
 - Notably, since the attack operates by compensating validators through fees, the feasibility of the attack is also contingent on the value of the native token or the designated fee-paying token/s. Fluctuations in token value directly impact the viability and cost of executing the attack.
 
-# Substrate (PoCS)
+# Implementation Specs
 
-*Special Thanks to [Ajay Joshua](https://github.com/I-Corinthian) and [Purva Chaudhari](https://github.com/Purva-Chaudhari) for contributing to the conceptualization of the Substrate-based Proof of Contract Stake (PoCS) design*
+## PoCS x NPoS
 
-## Substrate's Native NPoS Staking Model
-
-Substrate, as a modular blockchain framework, already offers a Nominated Proof of Stake (NPoS) staking model (Currently used by Polkadot for its Relay Chain). This model primarily revolves around the collaboration of validators and nominators. A critical aspect of this model involves bonding a certain stash of the native token of the blockchain to a validator or nominator account. With lesser modifications to the existing staking mechanism we would need to propose PoCS pallets to provide interoperability among existing infrastructure.
-
-## Per-Transaction Stake Score
-
-Substrate diverges from the conventional gas-based approach by employing a time-based mechanism called "weight", also known as "refTime". In this context, it is essential to elucidate the suitability of refTime as a viable alternative to the traditional gas concept. 
-
-In Substrate, the utilization of blocktime as a limited resource necessitates a unique approach to transaction fee calculations. This approach is centered around the "weight" metric, which comprises a two-dimensional vector encompassing two key components: `refTime` and `proofSize`. RefTime signifies the duration of time, measured in picoseconds, required for the transaction to execute on a benchmarked hardware. On the other hand, `proofSize` quantifies the size of the state read operation carried out by the transaction, expressed in bytes. While proofSize varies from one transaction to another and can exponentially increase, `refTime` is a more dependable and constrained resource, primarily bound by the available blocktime. In essence, refTime can be viewed as the unit of time charged for transaction execution, as opposed to the conventional Ethereum-based approach of charging per Opcode execution.
-
-Reputation, as discussed in earlier sections, plays a pivotal role within the system. It operates in a manner similar to the aforementioned components, with a constant value being incrementally added for each blockheight when a contract is actively used. This reputation value is stored within the contract's storage. The per-transaction stake score is then initiated, with each transaction contributing to a cumulative stake score in alignment with the contract's reputation. This mechanism is designed to emulate the behavior of an honest contract, as a single malicious validators will not be selected for producing every subsequent block.
-
-Mathematically, the stake score (SS) for a given transaction (Tx) can be expressed as:
-
-$$SS = refTime(Tx) \times R(account)$$
-
-Since reputation inherently encapsulates the concept of stake age, there is no requirement for an additional stake age component. This omission serves to limit the final stake score output and aids in the efficient management of large positive integers that could arise from the multiplication operation, attributed to the utilization of refTime measured in picoseconds. Also note that the **refTime here represents gas_used** not gas_limit set by the transaction creator.
-
-Furthermore, the system leverages storage fields that encompass critical details such as the contract owner's information, staked validator data, and fields facilitating reputation, including recentBlockHeight. These elements collectively contribute to the effective management of staking contracts within the Substrate ecosystem.
-
-Here are the contract fields explained in more detail:
-
-1. **Reputation:** Reputation is a vital metric within the system that increases incrementally by a constant factor (denoted as 'k') whenever the RecentBlockHeight is less than the CurrentBlockHeight. This mechanism ensures that as the contract remains actively used over time, its reputation gradually accumulates, reflecting its continued engagement.
-
-2. **RecentBlockHeight:** RecentBlockHeight corresponds to the specific block height at which a transaction associated with the contract is executed. It serves as a reference point in time and aids in incrementing reputation.
-
-3. **Stake Score:** The Stake Score is a fundamental component of the contract, and it contributes to the calculation of the contract's staking power. It increases the existing Stake Score by computing the product of two crucial factors: the gas used during the transaction (measured as refTime) and the contract's Existing Reputation. This multiplication operation ensures that transactions with a longer execution time or a higher reputation hold a more substantial stake within the system.
-
-4. **DelegateTo:** DelegateTo is the field that holds the account address of the validator to whom the contract is delegated or associated. This mechanism allows the contract to have a designated validator for managing its staking activities.
-
-5. **StakeOwner:** StakeOwner represents the external account that possesses the authorization to update the DelegateTo field. This ensures that only the designated account has the authority to change the association of the contract with a specific validator. The StakeOwner essentially manages the delegation of the contract's staking activities.
-
-These contract fields collectively facilitate the dynamic and effective operation of the contract within the blockchain ecosystem, allowing it to build reputation, engage with specific validators, and actively participate in the staking system.
-
-## Bonding to Validator
-
-Ensuring the seamless integration of the Proof of Contract Stake (PoCS) with Substrate's existing pallets is of paramount importance. In a standard Nominated Proof of Stake (NPoS) system, an account is required to stake a specific amount of the native token balance (currency), designating it to a stash account (validator account), controller account (for bonding and unbonding), and a payee (responsible for receiving rewards).
-
-Given that the PoCS Stake Score is an immutable element, we can represent the stake score as a balance that remains internal and non-transferable. Consequently, this stake score cannot be utilized externally, particularly when the contract is unbonded. In practical terms, for each transaction, the contract bonded to the validator can add its per transaction stake score by treating it as an additional bond.
-
-In essence, this approach results in the creation of new token units, symbolizing the stake score, which exist exclusively within the staking environment. In accordance with PoCS principles, when the contract's validator is changed or when unbonding occurs, the bonded token units are subject to potential slashing or purging.
-
-To ensure compatibility between PoCS stake scores and the existing NPoS infrastructure, which primarily interacts with balances, this integration facilitates interoperability with other runtime pallets that were originally designed for bonded balance units e.g., democracy pallet.
-
-Furthermore, in order to establish a trustless PoCS staking environment, it is advisable to enforce the payee to be the controller account exclusively. This controller account serves as the key point of contact for bonding and unbonding processes.
-
-During each transaction, the contract's storage fields diligently maintain a record of the contract's cumulative stake score. The per-transaction stake score is then added as an extra bond, represented in token balances, to the existing contract's bonded (staked) validator. The contract deployer, after deploying their contract, is required to initiate an additional call to update their delegateTo field and bond their contract to the validator. This step allows them to include their stake score as an additional contribution to the bond, enhancing the overall stake in the network.
-
-## Non-Custodial Rewards
-
-Validators have the autonomy to make a strategic choice between being a trusted or trustless validator, primarily driven by considerations related to reward distribution. This decision hinges on whether rewards are held by an external account requiring signatures, potentially exposing them to the risk of bad acting. Conversely, validators can opt for a non-custodial approach by opting for a  smart contract based controller account (responsible for receiving rewards) equipped with predefined rules which can be audited openly.
-
-It is essential for every contract deployer (staker) to be aware of their validator's controller account before establishing a bond with them. In cases where the controller account is a smart contract, it may encompass its own set of logical procedures for withdrawing rewards.
-
-Contract Owners can initiate an extrinsic call, for claiming rewards, to the controller smart contract. This call, in turn, can trigger an internal call to contracts pallet adapted for the PoCS version, utilizing various methods available within the Substrate framework, such as Chain Extensions. The purpose of this call is to verify the authenticity of the caller, ensuring that the caller is the rightful owner of the contract address that is bonded to the validator's controller account. This rigorous verification process reinforces the trustless nature of the reward distribution system, enhancing the overall security and integrity of the network.
-
-## Suspension as Penalty
-
-Penalties can be imposed upon validators who engage in activities that can be construed as malicious attacks conducted by network nodes. Such actions can result in the suspension of a validator for a specified number of blocks, placing them in an idle position. As the Stake Score is both non-fungible and non-transferable, rendering it unusable outside the staking environment, reducing or slashing it is ineffective in mitigating the severity of attacks in Substrate's NPoS <> PoCS Model. Suspending a validator proves to be an effective approach to penalize node operation costs and to notify bonded contract owners to reconsider their validator choices in order to prevent their stake from becoming idle.
-
-The seriousness of a dishonest act is assessed by multiplying the gravity of the offense by the `warmTime`, which can be set at `x` blocks. Given Substrate's 6-second block time, with an average of `75,000` blocks translates to an average duration of approximately 5 days. The warmTime serves as a defined period for any actions necessitating a gradual adjustment or preparation and can be used for multiple scenarios.
-
-## Contract & Staking Work Flow
-
-TODO: Detailed Workflow UML after Reference Implementation
-
-## Normalization Risks
-
-TODO
-
-## PoCS-Polkadot Parachain Collator Election
-
-Polkadot's Relaychain Protocol offers a fundamental advantage which can be leveraged, wherein the requirement for honesty from collators is required to only a single honest node. This is made possible by the security infrastructure provided by the Polkadot Relay Chain's protocols such as NPoS, BABE and GRANDPA, which handles the critical functions of providing security for the parachain and validation via the parachain's runtime state transition function. These elements allows for the implementation of a collator election mechanism based on a stake auction model.
-
-This Stake-Auction model provides a system where collators stake their bonds for securing slots and participate in an epoch-based auction to secure the right to be selected as block collators to build blocks. Proof of Contract Stake (PoCS) leverages contract's stake bonds created to participate in the Auction. The collators with the highest stakes in the PoCS system become prime candidates for building blocks, which are subsequently dispatched to the randomly selected parachain block validators from the Polkadot Relay Chain Protocol for Availability and Validity process.
-
-The consequences for a collator failing to author a block in the designated slot incurs a suspension similarly described in above sections. Additionally a restriction is levied for collators to monopolize sequential slot auctions. The bonds staked by collators are released at the conclusion of each epoch. Auctions are a recurring event, transpiring every n-1 epoch for an upcoming epoch, where each epoch shall span a configurable time e.g., a day, divided into slots of a configurable time e.g., 5 minutes, where each slot can occupy a block and total slots shall include auctioned and non-auctioned slots.
-
-At the pocs-genesis block's configuration, the total auction slots are determined by the factor or the positive integers that evenly divide the configured length of total slots per epoch for the parachain. The remaining sequential slots are designated as non-auction slots. Following each epoch's auction, if all auction slots are secured by unique collator nodes, the total auction slots are updated based on the next factor and vice versa. Collators are automatically assigned to non-auction slots following the auction-slot pattern repeated until epoch slots are filled, ensuring collators participation in building blocks for the entire epoch. 
-
-For instance, in a scenario where the total epoch time is configured as 24 hours with each slot lasting 5 minutes, resulting in a total of 288 slots, the pocs-genesis configuration may commence with two collator node and progressively increase to 3,4,6,8,..,288 as they are factors of 288 slots. This approach of having unique values in the auction slots heightens competition, thereby incentivizing the need for more nodes with substantial bond stakes.
-
-This Stake-Auction model adds sophistication through the practice of pre-announcing block collators for forward compatibility of building a fully-abstract network with further research proposals. This strategic move yields several benefits, including enhanced transparency, simplified mechanism, reduced uncertainty in the collator selection process, and the facilitation of better coordination among network participants.
-
-## Masking Bonds (Anonymous Staking)
-
-### Possessive Attack
-
-TODO
